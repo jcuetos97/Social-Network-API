@@ -1,6 +1,6 @@
+// Dependencies declared
 const express = require ('express');
 const db = require('./config/connection');
-const mongoose = require('mongoose');
 
 // App and Port created
 const app = express();
