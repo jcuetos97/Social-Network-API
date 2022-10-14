@@ -1,11 +1,12 @@
+// Dependencies
+const { Schema, model, Types } = require('mongoose');
 // Moment import to fomart timestamps
 const moment = require('moment');
-const { Schema, model, Types } = ('mongoose');
 //Reaction Schema
 const reactionSchema =  new Schema (
     {
         reactionId: {
-            type: Types.ObjectId,
+            type: Schema.Types.ObjectId,
             default: () => new Types.ObjectId(), 
         }, 
         reactionBody: {
