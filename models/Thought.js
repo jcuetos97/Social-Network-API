@@ -1,13 +1,12 @@
-// Dependencies
-const mongoose = require('mongoose');
 // Moment import to fomart timestamps
 const moment = require('moment');
+const { Schema, model, Types } = ('mongoose');
 //Reaction Schema
-const reactionSchema = mongoose.Schema (
+const reactionSchema =  new Schema (
     {
         reactionId: {
-            type: ObjectID,
-            default: () => new mongoose.Schema.Types.ObjectId(), 
+            type: Types.ObjectId,
+            default: () => new Types.ObjectId(), 
         }, 
         reactionBody: {
             type: String, required: true, 
@@ -25,7 +24,7 @@ const reactionSchema = mongoose.Schema (
     }
 )
 //Thought Schema
-const thoughtSchema = new mongoose.Schema(
+const thoughtSchema = new Schema(
     {
         thoughtText: {
             type: String, 
@@ -56,6 +55,6 @@ thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
 })
 //Thought model creation with thoughtSchema
-const Thought = mongoose.model('Thought', thoughtSchema); 
+const Thought = model('Thought', thoughtSchema); 
 //Thought model export
 module.exports = Thought;
