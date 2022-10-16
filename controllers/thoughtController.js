@@ -12,7 +12,7 @@ module.exports = {
         Thought.findOne({ _id: req.params.userId })
             .then((thought) => 
             !thought
-                ? res.status(200).json({message: 'No thought with this ID!'})
+                ? res.status(404).json( { message: 'No thought with this ID!' } )
                 : res.json(thought)
             )
             .catch((err) => res.status(500).json(err));
@@ -25,10 +25,63 @@ module.exports = {
     },
     // Update thought 
     updateThought(req, res) {
-
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $set: req.body },
+            { runValidators: true, new: true }
+        )
+        .then((thought) => 
+        !thought
+            ? res.status(404).json( { message: 'No thought with this ID!' } ) 
+            : res.json(thought)
+        )
+        .catch((err) => res.status(500).json(err)); 
     },
     // Remove thought
     deleteThought(req, res) {
-
+        Thought.findByIdAndDelete( { _id: req.params.thoughtId } )
+        .then((thought) =>
+        !thought
+          ? res.status(404).json( { message: 'No thought with this ID!' } )
+          : User.findOneAndUpdate(
+            { thoughts: req.params.thoughtId },
+            { $pull: { thoughts: req.params.thoughtId } },
+            { new: true }
+            )
+        )
+        .then((user) =>
+        !user
+          ? res.status(404).json( { message: 'Thought deleted, but no user found'} ) 
+          : res.json( { message: 'Thought successfully deleted' } )
+        )
+        .catch((err) => res.status(500).json(err)) ;
+    },
+    // Create a reaction stored in a single thought's reactions array field
+    createReaction(req, res) {
+        Thought.findOneAndUpdate( 
+            { _id: req.params.thoughtId },
+            { $addToSet: { reactions: req.body } },
+            { runValidators: true, new: true }
+        )
+        .then((thought) =>
+        !thought
+          ? res.status(404).json( { message: 'No thought with this ID!' } )
+          : res.json(thought)
+      )
+      .catch((err) => res.status(500).json(err)); 
+    },
+    // Delete to pull and remove a reaction by the reaction's reactionId value
+    deleteReaction(req, res) {
+        Thought.findOneAndDelete(
+            { _id: req.params.thoughtId },
+            { $pull: { reactions: { reactionId: req.params.reactionId } } },
+            { runValidators: true, new: true }
+        )
+        .then((thought) =>
+        !thought
+          ? res.status(404).json( { message: 'No thought with this ID!' } )
+          : res.json(thought)
+      )
+      .catch((err) => res.status(500).json(err)); 
     }
 }
