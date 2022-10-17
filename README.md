@@ -26,26 +26,26 @@ API for a social network web application where users can share their thoughts, r
 - To create seed data and test the API routes, use [Insomnia](https://insomnia.rest/download). 
 
 **USER**
-- GET All Users route: http://localhost:3001/api/users
-- GET User by Id: http://localhost:3001/api/users/:userId
-- POST Create User route: http://localhost:3001/api/users 
-- PUT Update User by Id route: http://localhost:3001/api/users/:userId
-- DELETE Delete User by Id route: http://localhost:3001/api/users/:userId
+- `GET` All Users route: http://localhost:3001/api/users
+- `GET` User by Id: http://localhost:3001/api/users/:userId
+- `POST` Create User route: http://localhost:3001/api/users 
+- `PUT` Update User by Id route: http://localhost:3001/api/users/:userId
+- `DELETE` Delete User by Id route: http://localhost:3001/api/users/:userId
 
 **FRIENDS**
-- POST Add friend to user's friend list: http://localhost:3001/api/users/:userId/friends/friendId
-- DELETE Remove friend from a user's friend list: http://localhost:3001/api/users/:userId/friends/friendId
+- `POST` Add friend to user's friend list: http://localhost:3001/api/users/:userId/friends/friendId
+- `DELETE` Remove friend from a user's friend list: http://localhost:3001/api/users/:userId/friends/friendId
 
 **THOUGHTS**
-- GET All Thoughts: http://localhost:3001/api/thoughts
-- GET Thought by Id: http://localhost:3001/api/thoughts/:thoughtId
-- POST Create Thought: http://localhost:3001/api/thought 
-- PUT Update Thought by Id: http://localhost:3001/api/thoughts/:thoughtId
-- DELETE Delete Thought by Id: http://localhost:3001/api/thoughts/:thoughtId
+- `GET` All Thoughts: http://localhost:3001/api/thoughts
+- `GET` Thought by Id: http://localhost:3001/api/thoughts/:thoughtId
+- `POST` Create Thought: http://localhost:3001/api/thought 
+- `PUT` Update Thought by Id: http://localhost:3001/api/thoughts/:thoughtId
+- `DELETE` Delete Thought by Id: http://localhost:3001/api/thoughts/:thoughtId
 
 **REACTIONS**
-- POST Create Reaction: http://localhost:3001/api/thoughts/:thoughtId/reactions
-- DELETE Remove Reaction: http://localhost:3001/api/thoughts/:thoughtId/reactions/:reactionId
+- `POST` Create Reaction: http://localhost:3001/api/thoughts/:thoughtId/reactions
+- `DELETE` Remove Reaction: http://localhost:3001/api/thoughts/:thoughtId/reactions/:reactionId
 
 ## [License](#table-of-contents)
 
