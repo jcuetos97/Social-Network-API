@@ -9,7 +9,7 @@ module.exports = {
     },
     // Get one single thought
     getOneThought(req, res) {
-        Thought.findOne({ _id: req.params.userId })
+        Thought.findOne({ _id: req.params.thoughtId })
             .then((thought) => 
             !thought
                 ? res.status(404).json( { message: 'No thought with this ID!' } )
@@ -72,7 +72,7 @@ module.exports = {
     },
     // Delete to pull and remove a reaction by the reaction's reactionId value
     deleteReaction(req, res) {
-        Thought.findOneAndDelete(
+        Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
             { $pull: { reactions: { reactionId: req.params.reactionId } } },
             { runValidators: true, new: true }

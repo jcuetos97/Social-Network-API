@@ -1,5 +1,5 @@
 // Dependencies
-const { Schema, model, Types } = require('mongoose');
+const { Schema, model } = require('mongoose');
 //User Schema
 const userSchema = new Schema(
     {
@@ -13,18 +13,18 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true, 
-            match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Please fill a valid email address",]
+            match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Please fill a valid email address",],
         }, 
-        thoughts:[
+        thoughts: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Thought',
+                ref: 'Thought'
             }
         ], 
-        friends:[
+        friends: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'User',
+                ref: 'User'
             }
         ]
     },
@@ -40,6 +40,6 @@ userSchema.virtual('friendCount').get(function() {
     return this.friends.length;
 })
 //User model creation with userSchema
-const User = model('username', userSchema);
+const User = model('User', userSchema);
 //User model export
 module.exports = User; 
