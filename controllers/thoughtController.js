@@ -20,6 +20,13 @@ module.exports = {
     // Create new thought
     createThought(req, res) {
         Thought.create(req.body)
+        .then((dbThoughtData) => {
+            return User.findOneAndUpdate(
+                {_id: req.body.userId },
+                { $push: { thoughts: dbThoughtData._id } },
+                { new: true },
+            );
+        })
         .then((dbThoughtData) => res.json(dbThoughtData))
         .catch((err) => res.status(500).json(err));
     },
@@ -83,5 +90,5 @@ module.exports = {
           : res.json(thought)
       )
       .catch((err) => res.status(500).json(err)); 
-    }
-}
+    },
+};
